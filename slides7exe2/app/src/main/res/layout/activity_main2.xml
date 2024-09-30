@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity2">
+
+    <EditText
+        android:id="@+id/edit_valordois"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:hint="Insira o valor "
+        android:layout_gravity="center"/>
+    <Button
+
+        android:id="@+id/edit_button_converterdolares"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="converter dolares"
+        android:backgroundTint="@color/purple"/>
+
+    <TextView
+        android:id="@+id/edit_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:hint="Insira o valor "
+        android:layout_gravity="center"/>
+
+    </LinearLayout>
