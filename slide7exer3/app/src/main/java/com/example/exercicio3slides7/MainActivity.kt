@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.buttonLogin.setOnClickListener {
+        binding.buttonRegisto.setOnClickListener {
 
 
             val intent = Intent(this, MainActivity2::class.java)
@@ -34,7 +34,15 @@ class MainActivity : AppCompatActivity() {
         binding.buttonLogin.setOnClickListener {
 
 
-            val intent = Intent(this, MainActivity2::class.java)
+            val intent = Intent(this, MainActivity3::class.java)
             startActivity(intent)
+        }
+
+        binding.buttonSobre.setOnClickListener {
+
+
+            val intent = Intent(this, MainActivity4::class.java)
+            startActivity(intent)
+        }
     }
-}
+
