@@ -15,23 +15,31 @@
         android:layout_gravity="center"
         android:minWidth="200dp"
         android:layout_margin="10dp"
-        android:text="Bem-vindo"
-        android:padding="20dp"
+        android:text="login"
+        android:padding="10dp"
         android:textSize="50sp"
         android:fontFamily="casual"
         android:textColor="#2196F3"/>
+    <TextView
+
+        android:id="@+id/id_nomepass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:text="Preencha  username"/>
+
     <EditText
         android:id="@+id/user_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="User: "
         android:layout_gravity="center"/>
 
     <TextView
 
-        android:id="@+id/id_password"
+        android:id="@+id/id_textopassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -48,7 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="User: "
         android:layout_gravity="center"/>
 
     <Button

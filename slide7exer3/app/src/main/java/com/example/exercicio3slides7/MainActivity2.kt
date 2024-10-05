@@ -18,12 +18,9 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-var contador =0
+
         binding.btnRegisto.setOnClickListener {
-        }
-        contador++
-        while(contador==1)
-        {
+
 
             val nome: String = binding.idUser.text.toString();
             val pass: String = binding.idPass.text.toString();
@@ -31,11 +28,9 @@ var contador =0
             val i: Intent = Intent(this, MainActivity3::class.java)
             i.putExtra("nome", nome)
             i.putExtra("pass", pass)
-
-
             startActivity(i)
-
 
 
         }
     }
+}
