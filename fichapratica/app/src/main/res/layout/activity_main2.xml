@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity2">
+<TextView
+
+    android:id="@+id/text_titulo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="30dp"
+    android:text="Registo"
+    android:minWidth="200dp"
+    android:padding="20dp"
+    android:textSize="20sp"
+    android:fontFamily="casual"
+    android:textColor="@color/black"/>
+
+
+<TextView
+
+android:id="@+id/text_sub"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:layout_margin="30dp"
+android:text="Preencha o seu username"
+android:minWidth="200dp"
+android:padding="20dp"
+android:textSize="20sp"
+android:fontFamily="casual"
+android:textColor="@color/black"/>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+
+<EditText
+android:id="@+id/nome"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="20dp"
+android:gravity="center"
+android:layout_gravity="center"/>
+<EditText
+
+android:id="@+id/pass"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+android:layout_margin="30dp"
+android:text="Preencha a sua username"
+android:minWidth="200dp"
+android:padding="20dp"
+android:textSize="20sp"
+android:fontFamily="casual"
+android:textColor="@color/black"/>
+<EditText
+android:id="@+id/telefone"
+android:inputType="textPassword"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_margin="20dp"
+android:gravity="center"
+android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/morada"
+        android:inputType="textPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+<Button
+
+android:id="@+id/btnr_registo"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_margin="5dp"
+android:backgroundTint="@color/blue"
+android:text="Registo"/>
+
+
+    </LinearLayout>
+
+
