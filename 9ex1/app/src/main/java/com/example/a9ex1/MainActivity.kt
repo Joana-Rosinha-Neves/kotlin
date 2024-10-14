@@ -12,49 +12,46 @@ import com.example.a9ex1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-        private val binding by lazy {
-            ActivityMainBinding.inflate(layoutInflater)
-        }
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
-            val sharedPreferences= this.getSharedPreferences("chave", Context.MODE_PRIVATE)
-            val userds = sharedPreferences.getString("chave","").toString();
-            val passds = sharedPreferences.getString("chavepass","").toString();
-
-            binding.btnLog.setOnClickListener {
-
-                val nome: String = binding.editUser.text.toString();
-                val pass: String = binding.editPass.text.toString();
+        val sharedPreferences = this.getSharedPreferences("chave", Context.MODE_PRIVATE)
+        val userds = sharedPreferences.getString("username", "").toString()
+        binding.editUser.setText(userds)
 
 
-                if (nome != "user" || pass != "pass") {
-                    //val intent = Intent(this, MainActivity3::class.java)
-                    // staeditorrtActivity(intent)
-                    Toast.makeText(applicationContext, "login errado ", Toast.LENGTH_SHORT).show()
+        binding.btnLog.setOnClickListener {
+
+            val nome: String = binding.editUser.text.toString();
+            val pass: String = binding.editPass.text.toString();
 
 
+            if (nome != "user" || pass != "pass") {
+
+                Toast.makeText(applicationContext, "login errado ", Toast.LENGTH_SHORT).show()
 
 
-                } else {
+            } else {
 
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putString(
-                        "chaves",
-                        binding.editUser.text.toString())
-                    editor.putString(
-                    "chavespass",
-                        binding.editPass.text.toString())
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putString(
+                    "username",
+                    binding.editUser.text.toString()
+                )
 
-                    editor.apply()
-                }
-                    //val intent = Intent(this, MainActivity2::class.java)
-                    //startActivity(intent)
-                    Toast.makeText(applicationContext, "login valido ", Toast.LENGTH_SHORT).show()
+
+                editor.apply()
+
+
+                Toast.makeText(applicationContext, "login valido ", Toast.LENGTH_SHORT).show()
 
             }
         }
     }
+}
 
