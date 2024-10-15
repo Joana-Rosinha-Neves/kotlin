@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">relogio</string>
+    <string name="dummy_button">abierto</string>
+    <string name="dummy_content">fechar</string>
+    <string name="teste">tieste</string>
+    <string name="tema">tema</string>
+</resources>

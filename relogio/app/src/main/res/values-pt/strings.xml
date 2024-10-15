@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">relogio</string>
+    <string name="title_activity_fullscreen">tema</string>
+    <string name="dummy_button">abrir</string>
+    <string name="dummy_content">cerrar</string>
+    <string name="teste">teste</string>
+    <string name="tema">tema</string>
+</resources>
