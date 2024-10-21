@@ -52,7 +52,7 @@ class MainActivity2 : AppCompatActivity() {
                         val novoproduto = binding.removerProduto.text.toString().toInt()
 
 
-                        for (novoproduto in 1..listacompras.size) {
+                        if (novoproduto in 1..listacompras.size) {
 
 
                         listacompras.removeAt(novoproduto - 1)

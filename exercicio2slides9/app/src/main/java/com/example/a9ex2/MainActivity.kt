@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val sharedPreferences = this.getSharedPreferences("chave", Context.MODE_PRIVATE)
+        val sharedPreferences = this.getSharedPreferences("lista", Context.MODE_PRIVATE)
         val listausuario = sharedPreferences.getString("lista", "").toString()
         binding.editText.setText(listausuario)
 
         binding.btnGravar.setOnClickListener {
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString(
-                "username",
+                "lista",
                 binding.editText.text.toString()
             )
 
