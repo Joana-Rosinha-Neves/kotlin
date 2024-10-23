@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "relogioApp"
 include(":app")
+include(":app")
  
