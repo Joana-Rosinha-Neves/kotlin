@@ -1,0 +1,354 @@
+package com.example.api1
+api 
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.lifecycle.viewmodel.CreationExtras.Empty.map
+
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.example.api1.databinding.ActivityMapsBinding
+
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var mMap: GoogleMap
+    private lateinit var binding: ActivityMapsBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        // Add a marker in Sydney and move the camera
+        val porto= LatLng(37.524975,-8.162267)
+        val casaDaMusica = LatLng(41.1552, -8.6252)
+
+        mMap.addMarker(MarkerOptions().position(porto).title("Marker in Porto"))
+        mMap.addMarker(MarkerOptions().position(porto).title("Marker in Casa da Musica"))
+
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+    }
+}
+
+
+relógio 
+
+ */
+class FullscreenActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityFullscreenBinding.inflate(layoutInflater)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+
+        // bateria
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val bateriaReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent?) {
+                if (intent != null) {
+                    val nivel: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
+//nivel de bateria alterado
+                    //Toast.makeText(applicationContext, nivel.toString(), Toast.LENGTH_SHORT).show()
+                    binding.textNivelBateria.text = "${nivel}%"
+                }
+            }
+
+        }      //quando nivel de bateria for alterada, e que vai dar o nivel alterado.
+        registerReceiver(bateriaReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+
+        var isChecked = true
+        binding.checkBateria.setOnClickListener {
+
+
+            if (isChecked) {
+                isChecked = false
+
+
+                binding.textNivelBateria.visibility = View.GONE
+            } else {
+                isChecked = true
+                binding.textNivelBateria.visibility = View.VISIBLE
+
+            }
+            binding.checkBateria.isChecked = isChecked
+        }
+        binding.layoutMenu.animate().translationY(500F)
+        binding.imageViewPreferencias.setOnClickListener{
+            binding.layoutMenu.visibility=View.VISIBLE
+            binding.layoutMenu.animate().translationY(0F).setDuration(
+                resources.getInteger(android.R.integer.config_mediumAnimTime).toLong())
+        }
+        binding.imageViewFechar.setOnClickListener{
+
+            binding.layoutMenu.animate().translationY(binding.layoutMenu.measuredHeight.toFloat())
+                .setDuration(
+                resources.getInteger(android.R.integer.config_mediumAnimTime).toLong())
+
+        }
+    }
+}
+RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/fullscreenBackgroundColor"
+    android:theme="@style/ThemeOverlay.Relogiocerto3.FullscreenContainer"
+    tools:context=".FullscreenActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_nivel_bateria"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/nivel_bateria" />
+
+<ImageView
+    android:id="@+id/image_view_preferencias"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="20dp"
+    android:src="@android:drawable/ic_menu_preferences"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+    <TextClock
+        android:id="@+id/clock_horas_minutos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="100sp"
+        android:format12Hour="hh:mm"
+        android:format24Hour="hh:mm"/>
+
+    <TextClock
+        android:layout_width="@+id/clock_seg"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textSize="30sp"
+        android:format12Hour="ss"
+        android:format24Hour="ss"/>
+
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_blue_900">
+
+
+        <CheckBox
+            android:id="@+id/check_bateria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:checked="true"
+            android:padding="20dp"
+            android:text="@string/nivel_bateria" />
+
+        <ImageView
+            android:id="@+id/image_view_fechar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="20dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+exercício recylce view 
+package com.example.review.adpater.views
+
+import com.example.review.adpater.CarroListAdpater
+import android.os.Bundle
+import android.util.Log.i
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.review.adpater.Data.CarroMock
+import com.example.review.adpater.model.Carro
+import com.example.review.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var adpater: CarroListAdpater
+    private var pos=-1
+    private lateinit var mock: CarroMock
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        mock = CarroMock()
+
+    adpater = CarroListAdpater(mock.listaCarros, CarroListAdpater.OnClickListener { carro ->
+                // Toast.makeText(this, it.modulo, Toast.LENGTH_SHORT).show()
+                pos = pesquisaPosicao(carro.id)
+                binding.editModelo.setText(mock.listaCarros[pos].modulo)
+
+            })
+        binding.recyclerView.adapter = adpater
+
+        binding.buttonInserir.setOnClickListener {
+            val modulo = binding.editModelo.text.toString().toInt()
+            mock.listaCarros.add(Carro(modulo, modulo.toString()))
+            adpater.notifyDataSetChanged()
+
+        }
+
+        binding.buttonEditar.setOnClickListener {
+            if(pos>=0){
+                val modulo= binding.editModelo.text.toString()
+                mock.listaCarros[pos].modulo = modulo
+                mock.listaCarros[pos].id = modulo.toInt()
+                pos=-1
+                adpater.notifyDataSetChanged()
+
+            }
+        }
+
+        binding.buttonEleminar.setOnClickListener{
+            if (pos>=0) {
+
+                mock.listaCarros.removeAt(pos)
+                pos = -1
+                adpater.notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    private fun pesquisaPosicao(id: Int): Int {
+        for (i in 0..mock.listaCarros.size) {
+            if(mock.listaCarros[i].id==id) return i
+        }
+return -1
+    }
+}
+package com.example.review.adpater
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.review.R
+import com.example.review.adpater.Data.CarroMock
+import com.example.review.adpater.model.Carro
+import kotlinx.coroutines.NonDisposableHandle.parent
+
+
+class CarroListAdpater(val listaCarros: ArrayList<Carro>, val onClickListener: OnClickListener) :
+    RecyclerView.Adapter<CarroListAdpater.CarroViewHolder>() {
+var contadorOnCreate =0
+    var contadorOnBindi=0
+
+    class CarroViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+        val textView: TextView = itemView.findViewById(R.id.text_modulo)
+    }
+class OnClickListener(val clickListener: (carro: Carro)->Unit){
+    fun onClick(carro: Carro) = clickListener(carro)
+}
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarroViewHolder {
+        contadorOnCreate++
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.row_carro_list, parent, false)
+        return CarroViewHolder(view)
+
+    }
+
+    override fun getItemCount(): Int {
+        return listaCarros.size
+    }
+
+    override fun onBindViewHolder(holder: CarroViewHolder, position: Int) {
+        contadorOnBindi++
+        val carro = listaCarros[position]
+        holder.textView.setText(carro.modulo)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(carro)
+        }
+
+    }}
+package com.example.review.adpater.model
+
+class Carro (var id: Int, var modulo: String) {
+
+package com.example.review.adpater.Data
+
+import com.example.review.adpater.model.Carro
+
+
+class CarroMock () {
+
+
+    val listaCarros = ArrayList<Carro>()
+
+
+    init {
+        for(i in 0..5) {
+            listaCarros.add(Carro(i, i.toString()))
+
+        }
+    }
+}
+
+
